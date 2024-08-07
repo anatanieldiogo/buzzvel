@@ -198,6 +198,13 @@ Este endpoint termina a secção do usuário (sem parametro), retorna:
     {
         "message": "You are logged out!"
     }
+    
+**Exportar pdf**
+    
+`http://127.0.0.1:8000/api/export/holiday/` `GET`
+
+
+Este endpoint retorna uma arquivo .pdf.
 
 **OBS:** Note que não é possível um usuário visualizar ou alterar as informações de outros usuários.
 
