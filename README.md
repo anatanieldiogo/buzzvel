@@ -1,66 +1,221 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Buzzvel Vacation Test - Anataniel Diogo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta api foi desenvolvida utilisando o framework [Laravel](https://laravel.com/) v11. 
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Como rodar o projecto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Para rodar o Projecto você precisa ter o Laravel e o Mysql instalado na sua máquina e bem configurado.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Após a configuração do Laravel e Mysql, abra o seu terminal e faça o clone do projecto:
 
-## Learning Laravel
+      $ git clone https://github.com/anatanieldiogo/buzzvel.git
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ Depois, acessar o diretório do projecto(buzzvel) pelo terminal e seguir os passos:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Instalar as dependências
+    
+    $ composer install
 
-## Laravel Sponsors
+Ou caso o comando acima apresentar um erro sobre a atualização das dependências:
+    
+    $ composer update
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Copiar o arquivo .env
 
-### Premium Partners
+    $ cp .env.example .env
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Gerar a chave da aplicação
 
-## Contributing
+    $ php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Configurar o banco de dados no arquivo .env copiado acima:
 
-## Code of Conduct
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE= nome_do_banco_de_dados(ex: Buzzvel)
+    DB_USERNAME= nome_de_usuario_do_mysql(ex: root)
+    DB_PASSWORD= caso_tenha_colocar_a_palavra_passe
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Feito isso podemos rodar o projeto:
 
-## Security Vulnerabilities
+    $ php artisan serve
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Rodar as migrations para criar as tabelas no banco de dados:
 
-## License
+    $ php artisan migrate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Seeders
+
+De antemão preparei dois usuários e respetivos holidays criados por eles, serão inseridas no DB automaticamente utilizando seeders, e para tal devemos rodar o comando:
+
+    $ php artisan migrate:fresh --seed
+
+Ou
+
+    $ php artisan db:seed
+
+Como rodar uma [Seeder](https://laravel.com/docs/9.x/seeding#running-seeders)
+
+## Usuários
+
+- anataniel@gmail.com
+- carlos@gmail.com
+
+Ambos com a senha: `password`
+
+
+## Endpoints
+
+Para testar o funcionamento correto dos endpoints aconselho a utilização do [Postman](https://www.postman.com/) ou de outra ferramenta a sua escolha!
+
+Os endpoints são protegidos por um token `sanctum` exceto(/login), gerado após a autenticação, e o mesmo é do tipo `Bearer Token` e, deve ser usado nos seguintes endpoints:
+
+- http://127.0.0.1:8000/api/holidays/ `GET`
+- http://127.0.0.1:8000/api/holidays/ `POST`
+- http://127.0.0.1:8000/api/holidays/ `holiday_id` `PUT`
+- http://127.0.0.1:8000/api/holidays/ `holiday_id` `DELETE`
+- http://127.0.0.1:8000/api/export/holiday/ `holiday_id` `GET`
+- http://127.0.0.1:8000/api/auth/logout `GET`
+
+configurar o token no Postman [Bearer Token](https://www.youtube.com/watch?v=PPi9teNKRHY)
+
+## Endpoints - descrição
+
+**Login**
+
+`http://127.0.0.1:8000/api/auth/login` `POST`
+
+
+Este endpoint é reponsavel pela autenticação dos usuários e deve receber os seguintes parametros:
+
+- email
+- password
+
+Retorna:
+
+    {
+        "accessToken": "TOKEN_HASH",
+        "token_type": "Bearer"
+    }
+    
+O valor do `accessToken` deve ser inserido no header nos demais endpoints para a autorização.
+
+**Listar holiday**
+
+`http://127.0.0.1:8000/api/holidays/` `GET`
+
+Este endpoint retorna todos os holidays do usuário autenticado (sem parametro), retorna:
+
+    {
+        "is_success": true,
+        "data": [
+            {
+                "id": ...,
+                "title": "...",
+                "description": "...",
+                "date": "...",
+                "location": "...",
+                "user": {
+                    "name": "holiday_owner_name"
+                }
+            },
+            ...
+        ]
+    }
+
+**Criar holiday**
+
+`http://127.0.0.1:8000/api/holidays/` `POST`
+
+Este endpoint cria um holiday e tem os seguintes parametros:
+
+- title
+- description
+- date
+- location
+
+Retorna:
+
+    {
+        "is_success": true,
+        "data": {
+            "id": ...,
+            "title": "...",
+            "description": "...",
+            "date": "...",
+            "location": "...",
+            "user": {
+                "name": "..."
+            }
+        },
+        "message": "Holiday Created Successful"
+    }
+
+**Atualizar holiday**
+
+`http://127.0.0.1:8000/api/holidays/` `holiday_id` `PUT`
+
+
+Este endpoint atualiza um holiday especifico e tem como parametros:
+
+- title
+- description
+- date
+- location
+- `_method`
+    
+OBS: Apesar de ser PUT muitas vezes esse método não funciona em alguns softwares como no POSTMAN, para isso devemos colocar como POST e adicionar o parametro `_method` com o valor PUT.
+
+Retorna:
+
+    {
+        "is_success": true,
+        "data": "Holiday Updated Successful"
+    }
+
+**Apagar holiday**
+
+`http://127.0.0.1:8000/api/holidays/` `holiday_id` `DELETE`
+
+
+Este endpoint deleta um holiday especifico (sem parametro), retorna:
+
+    {
+        "is_success": true,
+        "data": "Holiday Deleted Successful"
+    }
+
+**Logout**
+    
+`http://127.0.0.1:8000/api/auth/logout` `GET`
+
+
+Este endpoint termina a secção do usuário (sem parametro), retorna:
+
+    {
+        "message": "You are logged out!"
+    }
+
+**OBS:** Note que não é possível um usuário visualizar ou alterar as informações de outros usuários.
+
+## Testes
+
+Para rodar os testes unitários basta executar o comando:
+
+    $ php artisan test
+
+Ou
+
+    $ ./vendor/bin/phpunit
+
+Caso preferir, pode rodar os teste no ambiente sqlite alterando o arquivo `phpunit.xml` na raíz do projeto:
+
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
+
+Para um melhor desempenho durante os testes.
+
+**NOTA:** Se por algum motivo não for possível executar o sistema porfavor entrar em contato!
