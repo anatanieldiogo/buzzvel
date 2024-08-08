@@ -51,11 +51,11 @@ Rodar as migrations para criar as tabelas no banco de dados:
 
 De antemão preparei dois usuários e respetivos holidays criados por eles, serão inseridas no DB automaticamente utilizando seeders, e para tal devemos rodar o comando:
 
-    $ php artisan migrate:fresh --seed
+    $ php artisan db:seed
 
 Ou
 
-    $ php artisan db:seed
+    $ php artisan migrate:fresh --seed
 
 Como rodar uma [Seeder](https://laravel.com/docs/9.x/seeding#running-seeders)
 
