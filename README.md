@@ -212,11 +212,11 @@ Este endpoint retorna uma arquivo .pdf.
 
 Para rodar os testes unitários basta executar o comando:
 
-    $ php artisan test
+    $ php artisan test --testsuite=Feature
 
 Ou
 
-    $ ./vendor/bin/phpunit
+    $ ./vendor/bin/phpunit --testsuite=Feature
 
 Caso preferir, pode rodar os teste no ambiente sqlite alterando o arquivo `phpunit.xml` na raíz do projeto:
 
